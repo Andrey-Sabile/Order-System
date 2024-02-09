@@ -1239,6 +1239,7 @@ export interface IMenuItem extends IBaseAuditableEntity {
 export class Order extends BaseAuditableEntity implements IOrder {
     items?: MenuItem[];
     tableNumber?: number | undefined;
+    done?: boolean | undefined;
 
     constructor(data?: IOrder) {
         super(data);
@@ -1253,6 +1254,7 @@ export class Order extends BaseAuditableEntity implements IOrder {
                     this.items!.push(MenuItem.fromJS(item));
             }
             this.tableNumber = _data["tableNumber"];
+            this.done = _data["done"];
         }
     }
 
@@ -1271,6 +1273,7 @@ export class Order extends BaseAuditableEntity implements IOrder {
                 data["items"].push(item.toJSON());
         }
         data["tableNumber"] = this.tableNumber;
+        data["done"] = this.done;
         super.toJSON(data);
         return data;
     }
@@ -1279,6 +1282,7 @@ export class Order extends BaseAuditableEntity implements IOrder {
 export interface IOrder extends IBaseAuditableEntity {
     items?: MenuItem[];
     tableNumber?: number | undefined;
+    done?: boolean | undefined;
 }
 
 export abstract class BaseEvent implements IBaseEvent {
