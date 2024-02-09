@@ -1,0 +1,26 @@
+<h1>Menu</h1>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="d-flex justify-content-evenly flex-wrap gap-1">
+            @for (menuItem of menuItems; track menuItem.id) {
+                <mat-card class="mat-elevation-z2 w-25">
+                    <mat-card-header>
+                        <mat-card-title>{{ menuItem.name }}</mat-card-title>
+                        <mat-card-subtitle>${{ menuItem.price }}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image src="../../../assets/photos/photo1.jpg">
+                    <mat-card-actions>
+                        <button mat-stroked-button (click)="addItem(menuItem)">Add</button>
+                    </mat-card-actions>
+                </mat-card>
+            }
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        @for (item of order.items; track order.items) {
+            <li>{{ item.name }} {{ item.price }}</li>
+        }
+        <button mat-flat-button color="primary" (click)="sendOrder()">Send Order</button>
+    </div>
+</div>
