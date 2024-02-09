@@ -37,6 +37,7 @@ export class MenuComponent implements OnInit{
 
   sendOrder() : void {
     const ids = this.order.items.map(({id}) => id);
+    console.log(ids);
     this.orderClient.createOrder({ menuItemIds: ids } as CreateOrderCommand).subscribe();
   }
 }

@@ -2,6 +2,8 @@
 using OrderSystem.Application.TodoLists.Commands.DeleteTodoList;
 using OrderSystem.Application.TodoLists.Commands.UpdateTodoList;
 using OrderSystem.Application.TodoLists.Queries.GetTodos;
+using OrderSystem.Application.TodoLists.Queries.GetTodosRaw;
+using OrderSystem.Domain.Entities;
 
 namespace OrderSystem.Web.Endpoints;
 
@@ -20,6 +22,11 @@ public class TodoLists : EndpointGroupBase
     public async Task<TodosVm> GetTodoLists(ISender sender)
     {
         return await sender.Send(new GetTodosQuery());
+    }
+
+    public async Task<IList<TodoListDto>> GetTodoListsRaw(ISender sender)
+    {
+        return await sender.Send(new GetTodosRawQuery());
     }
 
     public async Task<int> CreateTodoList(ISender sender, CreateTodoListCommand command)

@@ -16,7 +16,7 @@ public class Orders : EndpointGroupBase
             .MapDelete(DeleteOrder, "{id}");
     }
 
-    public async Task<IList<Order>> GetOrders(ISender sender)
+    public async Task<IList<OrderDto>> GetOrders(ISender sender)
     {
         return await sender.Send(new GetOrdersQuery());
     }

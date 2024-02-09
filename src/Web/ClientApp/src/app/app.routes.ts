@@ -5,6 +5,7 @@ import { FetchDataComponent } from './features/fetch-data/fetch-data.component';
 import { TodoComponent } from './features/todo/todo.component';
 import { MenuComponent } from './features/menu/menu.component';
 import { TablesComponent } from './features/tables/tables.component';
+import { KitchendisplayComponent } from './features/kitchendisplay/kitchendisplay.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -13,4 +14,5 @@ export const routes: Routes = [
     { path: 'todo', component: TodoComponent },
     { path: 'menu', component: MenuComponent },
     { path: 'tables', component: TablesComponent},
+    { path: 'kitchen', component: KitchendisplayComponent},
 ]

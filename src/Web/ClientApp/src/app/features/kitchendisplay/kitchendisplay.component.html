@@ -1,0 +1,16 @@
+@for (order of orders; track order.done) {
+    @if (order.done == false) {
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    Order no: {{ order.id }}
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                @for (item of order.items; track item) {
+                    <li>{{ item.name }}</li>
+                }
+            </mat-card-content>
+        </mat-card>
+    }
+}

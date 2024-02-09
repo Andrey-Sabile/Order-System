@@ -6,5 +6,5 @@ public class MenuItem : BaseAuditableEntity
 
     public int Price { get; set; }
 
-    public IList<Order> Orders { get; } = [];
+    public IList<Order> Orders { get; set; } = [];
 }
