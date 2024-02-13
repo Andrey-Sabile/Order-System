@@ -12,7 +12,7 @@ public class Orders : EndpointGroupBase
             .RequireAuthorization()
             .MapGet(GetOrders)
             .MapPost(CreateOrder)
-            .MapPut(UpdateOrder, "{id}")
+            .MapPut(UpdateOrderQuantity, "UpdateQuantity/{id}")
             .MapDelete(DeleteOrder, "{id}");
     }
 
@@ -26,7 +26,7 @@ public class Orders : EndpointGroupBase
         return await sender.Send(command);
     }
 
-    public async Task<IResult> UpdateOrder(ISender sender, int id, UpdateOrderCommand command)
+    public async Task<IResult> UpdateOrderQuantity(ISender sender, int id, UpdateOrderQuantityCommand command)
     {
         if (id != command.OrderId) return Results.BadRequest();
         await sender.Send(command);

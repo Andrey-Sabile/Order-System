@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderSystem.Infrastructure.Data;
 
@@ -10,9 +11,11 @@ using OrderSystem.Infrastructure.Data;
 namespace OrderSystem.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240213082927_Update MenuItemOrder properties 2")]
+    partial class UpdateMenuItemOrderproperties2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
@@ -180,10 +183,8 @@ namespace OrderSystem.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("OrderSystem.Domain.Entities.MenuItemOrder", b =>
                 {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MenuItemId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTimeOffset>("Created")
@@ -192,21 +193,26 @@ namespace OrderSystem.Infrastructure.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTimeOffset>("LastModified")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("MenuItemId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("OrderQuantity")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("OrderId", "MenuItemId");
+                    b.HasKey("Id");
 
                     b.HasIndex("MenuItemId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("MenuItemOrders");
                 });
@@ -437,7 +443,7 @@ namespace OrderSystem.Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("OrderSystem.Domain.Entities.Order", null)
-                        .WithMany("MenuItemOrders")
+                        .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -475,11 +481,6 @@ namespace OrderSystem.Infrastructure.Data.Migrations
 
                     b.Navigation("Colour")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("OrderSystem.Domain.Entities.Order", b =>
-                {
-                    b.Navigation("MenuItemOrders");
                 });
 
             modelBuilder.Entity("OrderSystem.Domain.Entities.TodoList", b =>

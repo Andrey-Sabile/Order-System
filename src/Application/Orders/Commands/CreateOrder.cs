@@ -1,5 +1,4 @@
 using OrderSystem.Application.Common.Interfaces;
-using OrderSystem.Application.MenuItems.Commands;
 using OrderSystem.Domain.Entities;
 
 namespace OrderSystem.Application.Orders.Commands;

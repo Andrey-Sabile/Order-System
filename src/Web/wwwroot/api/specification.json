@@ -204,12 +204,12 @@
         }
       }
     },
-    "/api/Orders/{id}": {
+    "/api/Orders/UpdateQuantity/{id}": {
       "put": {
         "tags": [
           "Orders"
         ],
-        "operationId": "UpdateOrder",
+        "operationId": "UpdateOrderQuantity",
         "parameters": [
           {
             "name": "id",
@@ -227,7 +227,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateOrderCommand"
+                "$ref": "#/components/schemas/UpdateOrderQuantityCommand"
               }
             }
           },
@@ -239,7 +239,9 @@
             "description": ""
           }
         }
-      },
+      }
+    },
+    "/api/Orders/{id}": {
       "delete": {
         "tags": [
           "Orders"
@@ -628,9 +630,40 @@
                   "$ref": "#/components/schemas/MenuItem"
                 }
               },
+              "menuItemOrders": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/MenuItemOrder"
+                }
+              },
               "done": {
                 "type": "boolean",
                 "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "MenuItemOrder": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseAuditableEntity"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "orderId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "menuItemId": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "orderQuantity": {
+                "type": "integer",
+                "format": "int32"
               }
             }
           }
@@ -769,15 +802,19 @@
           }
         }
       },
-      "UpdateOrderCommand": {
+      "UpdateOrderQuantityCommand": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "menuItemId": {
             "type": "integer",
             "format": "int32"
           },
-          "orderId": {
+          "quantity": {
             "type": "integer",
             "format": "int32"
           }

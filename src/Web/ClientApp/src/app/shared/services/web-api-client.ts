@@ -297,7 +297,7 @@ export class MenuItemsClient implements IMenuItemsClient {
 export interface IOrdersClient {
     getOrders(): Observable<OrderDto[]>;
     createOrder(command: CreateOrderCommand): Observable<number>;
-    updateOrder(id: number, command: UpdateOrderCommand): Observable<void>;
+    updateOrderQuantity(id: number, command: UpdateOrderQuantityCommand): Observable<void>;
     deleteOrder(id: number): Observable<void>;
 }
 
@@ -422,8 +422,8 @@ export class OrdersClient implements IOrdersClient {
         return _observableOf(null as any);
     }
 
-    updateOrder(id: number, command: UpdateOrderCommand): Observable<void> {
-        let url_ = this.baseUrl + "/api/Orders/{id}";
+    updateOrderQuantity(id: number, command: UpdateOrderQuantityCommand): Observable<void> {
+        let url_ = this.baseUrl + "/api/Orders/UpdateQuantity/{id}";
         if (id === undefined || id === null)
             throw new Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
@@ -441,11 +441,11 @@ export class OrdersClient implements IOrdersClient {
         };
 
         return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processUpdateOrder(response_);
+            return this.processUpdateOrderQuantity(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
                 try {
-                    return this.processUpdateOrder(response_ as any);
+                    return this.processUpdateOrderQuantity(response_ as any);
                 } catch (e) {
                     return _observableThrow(e) as any as Observable<void>;
                 }
@@ -454,7 +454,7 @@ export class OrdersClient implements IOrdersClient {
         }));
     }
 
-    protected processUpdateOrder(response: HttpResponseBase): Observable<void> {
+    protected processUpdateOrderQuantity(response: HttpResponseBase): Observable<void> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -1239,6 +1239,7 @@ export interface IMenuItem extends IBaseAuditableEntity {
 export class Order extends BaseAuditableEntity implements IOrder {
     tableNumber?: number | undefined;
     items?: MenuItem[];
+    menuItemOrders?: MenuItemOrder[];
     done?: boolean | undefined;
 
     constructor(data?: IOrder) {
@@ -1253,6 +1254,11 @@ export class Order extends BaseAuditableEntity implements IOrder {
                 this.items = [] as any;
                 for (let item of _data["items"])
                     this.items!.push(MenuItem.fromJS(item));
+            }
+            if (Array.isArray(_data["menuItemOrders"])) {
+                this.menuItemOrders = [] as any;
+                for (let item of _data["menuItemOrders"])
+                    this.menuItemOrders!.push(MenuItemOrder.fromJS(item));
             }
             this.done = _data["done"];
         }
@@ -1273,6 +1279,11 @@ export class Order extends BaseAuditableEntity implements IOrder {
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
+        if (Array.isArray(this.menuItemOrders)) {
+            data["menuItemOrders"] = [];
+            for (let item of this.menuItemOrders)
+                data["menuItemOrders"].push(item.toJSON());
+        }
         data["done"] = this.done;
         super.toJSON(data);
         return data;
@@ -1282,7 +1293,49 @@ export class Order extends BaseAuditableEntity implements IOrder {
 export interface IOrder extends IBaseAuditableEntity {
     tableNumber?: number | undefined;
     items?: MenuItem[];
+    menuItemOrders?: MenuItemOrder[];
     done?: boolean | undefined;
+}
+
+export class MenuItemOrder extends BaseAuditableEntity implements IMenuItemOrder {
+    orderId?: number;
+    menuItemId?: number;
+    orderQuantity?: number;
+
+    constructor(data?: IMenuItemOrder) {
+        super(data);
+    }
+
+    override init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.orderId = _data["orderId"];
+            this.menuItemId = _data["menuItemId"];
+            this.orderQuantity = _data["orderQuantity"];
+        }
+    }
+
+    static override fromJS(data: any): MenuItemOrder {
+        data = typeof data === 'object' ? data : {};
+        let result = new MenuItemOrder();
+        result.init(data);
+        return result;
+    }
+
+    override toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["orderId"] = this.orderId;
+        data["menuItemId"] = this.menuItemId;
+        data["orderQuantity"] = this.orderQuantity;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IMenuItemOrder extends IBaseAuditableEntity {
+    orderId?: number;
+    menuItemId?: number;
+    orderQuantity?: number;
 }
 
 export abstract class BaseEvent implements IBaseEvent {
@@ -1533,11 +1586,12 @@ export interface ICreateOrderCommand {
     menuItemIds?: number[];
 }
 
-export class UpdateOrderCommand implements IUpdateOrderCommand {
-    menuItemId?: number;
+export class UpdateOrderQuantityCommand implements IUpdateOrderQuantityCommand {
     orderId?: number;
+    menuItemId?: number;
+    quantity?: number;
 
-    constructor(data?: IUpdateOrderCommand) {
+    constructor(data?: IUpdateOrderQuantityCommand) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -1548,29 +1602,32 @@ export class UpdateOrderCommand implements IUpdateOrderCommand {
 
     init(_data?: any) {
         if (_data) {
-            this.menuItemId = _data["menuItemId"];
             this.orderId = _data["orderId"];
+            this.menuItemId = _data["menuItemId"];
+            this.quantity = _data["quantity"];
         }
     }
 
-    static fromJS(data: any): UpdateOrderCommand {
+    static fromJS(data: any): UpdateOrderQuantityCommand {
         data = typeof data === 'object' ? data : {};
-        let result = new UpdateOrderCommand();
+        let result = new UpdateOrderQuantityCommand();
         result.init(data);
         return result;
     }
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["menuItemId"] = this.menuItemId;
         data["orderId"] = this.orderId;
+        data["menuItemId"] = this.menuItemId;
+        data["quantity"] = this.quantity;
         return data;
     }
 }
 
-export interface IUpdateOrderCommand {
-    menuItemId?: number;
+export interface IUpdateOrderQuantityCommand {
     orderId?: number;
+    menuItemId?: number;
+    quantity?: number;
 }
 
 export class PaginatedListOfTodoItemBriefDto implements IPaginatedListOfTodoItemBriefDto {
