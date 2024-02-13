@@ -1191,6 +1191,7 @@ export class MenuItem extends BaseAuditableEntity implements IMenuItem {
     name?: string | undefined;
     price?: number;
     orders?: Order[];
+    menuItemOrders?: MenuItemOrder[];
 
     constructor(data?: IMenuItem) {
         super(data);
@@ -1205,6 +1206,11 @@ export class MenuItem extends BaseAuditableEntity implements IMenuItem {
                 this.orders = [] as any;
                 for (let item of _data["orders"])
                     this.orders!.push(Order.fromJS(item));
+            }
+            if (Array.isArray(_data["menuItemOrders"])) {
+                this.menuItemOrders = [] as any;
+                for (let item of _data["menuItemOrders"])
+                    this.menuItemOrders!.push(MenuItemOrder.fromJS(item));
             }
         }
     }
@@ -1225,6 +1231,11 @@ export class MenuItem extends BaseAuditableEntity implements IMenuItem {
             for (let item of this.orders)
                 data["orders"].push(item.toJSON());
         }
+        if (Array.isArray(this.menuItemOrders)) {
+            data["menuItemOrders"] = [];
+            for (let item of this.menuItemOrders)
+                data["menuItemOrders"].push(item.toJSON());
+        }
         super.toJSON(data);
         return data;
     }
@@ -1234,6 +1245,7 @@ export interface IMenuItem extends IBaseAuditableEntity {
     name?: string | undefined;
     price?: number;
     orders?: Order[];
+    menuItemOrders?: MenuItemOrder[];
 }
 
 export class Order extends BaseAuditableEntity implements IOrder {
@@ -1455,6 +1467,7 @@ export class OrderDto implements IOrderDto {
     tableNumber?: number | undefined;
     done?: boolean | undefined;
     items?: MenuItemDto[];
+    menuItemOrders?: MenuItemOrderDto[];
 
     constructor(data?: IOrderDto) {
         if (data) {
@@ -1474,6 +1487,11 @@ export class OrderDto implements IOrderDto {
                 this.items = [] as any;
                 for (let item of _data["items"])
                     this.items!.push(MenuItemDto.fromJS(item));
+            }
+            if (Array.isArray(_data["menuItemOrders"])) {
+                this.menuItemOrders = [] as any;
+                for (let item of _data["menuItemOrders"])
+                    this.menuItemOrders!.push(MenuItemOrderDto.fromJS(item));
             }
         }
     }
@@ -1495,6 +1513,11 @@ export class OrderDto implements IOrderDto {
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
+        if (Array.isArray(this.menuItemOrders)) {
+            data["menuItemOrders"] = [];
+            for (let item of this.menuItemOrders)
+                data["menuItemOrders"].push(item.toJSON());
+        }
         return data;
     }
 }
@@ -1504,10 +1527,13 @@ export interface IOrderDto {
     tableNumber?: number | undefined;
     done?: boolean | undefined;
     items?: MenuItemDto[];
+    menuItemOrders?: MenuItemOrderDto[];
 }
 
 export class MenuItemDto implements IMenuItemDto {
     name?: string | undefined;
+    id?: number | undefined;
+    orderQuantity?: number | undefined;
 
     constructor(data?: IMenuItemDto) {
         if (data) {
@@ -1521,6 +1547,8 @@ export class MenuItemDto implements IMenuItemDto {
     init(_data?: any) {
         if (_data) {
             this.name = _data["name"];
+            this.id = _data["id"];
+            this.orderQuantity = _data["orderQuantity"];
         }
     }
 
@@ -1534,11 +1562,55 @@ export class MenuItemDto implements IMenuItemDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
+        data["id"] = this.id;
+        data["orderQuantity"] = this.orderQuantity;
         return data;
     }
 }
 
 export interface IMenuItemDto {
+    name?: string | undefined;
+    id?: number | undefined;
+    orderQuantity?: number | undefined;
+}
+
+export class MenuItemOrderDto implements IMenuItemOrderDto {
+    orderQuantity?: number;
+    name?: string | undefined;
+
+    constructor(data?: IMenuItemOrderDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.orderQuantity = _data["orderQuantity"];
+            this.name = _data["name"];
+        }
+    }
+
+    static fromJS(data: any): MenuItemOrderDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new MenuItemOrderDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["orderQuantity"] = this.orderQuantity;
+        data["name"] = this.name;
+        return data;
+    }
+}
+
+export interface IMenuItemOrderDto {
+    orderQuantity?: number;
     name?: string | undefined;
 }
 

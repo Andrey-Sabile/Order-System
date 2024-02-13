@@ -12,6 +12,8 @@ public class OrderDto
 
     public IReadOnlyCollection<MenuItemDto> Items { get; init; } = [];
 
+    public IReadOnlyCollection<MenuItemOrderDto> MenuItemOrders { get; init; } = [];
+
     private class Mapping : Profile
     {
         public Mapping()
