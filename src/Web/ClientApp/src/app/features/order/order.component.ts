@@ -6,13 +6,13 @@ import { MenuItem, MenuItemsClient,
   Order, OrdersClient, CreateOrderCommand } from '../../shared/services/web-api-client';
 
 @Component({
-  selector: 'app-menu',
+  selector: 'app-order',
   standalone: true,
   imports: [MatCardModule, MatButtonModule, FormsModule],
-  templateUrl: './menu.component.html',
+  templateUrl: './order.component.html',
   styles: ``
 })
-export class MenuComponent implements OnInit{
+export class OrderComponent implements OnInit{
   public menuItems: MenuItem[] = [];
   public order: Order;
 
@@ -38,4 +38,5 @@ export class MenuComponent implements OnInit{
     const ids = this.order.items.map(({id}) => id);
     this.orderClient.createOrder({ menuItemIds: ids } as CreateOrderCommand).subscribe();
   }
+
 }
