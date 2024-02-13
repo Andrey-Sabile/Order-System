@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { MenuItem, MenuItemsClient, 
   Order, OrdersClient, CreateOrderCommand } from '../../shared/services/web-api-client';
@@ -18,7 +19,8 @@ export class OrderComponent implements OnInit{
 
   constructor(
     private menuClient: MenuItemsClient, 
-    private orderClient: OrdersClient
+    private orderClient: OrdersClient,
+    private _snackBar: MatSnackBar,
     ){}
 
   ngOnInit(): void {
@@ -37,6 +39,17 @@ export class OrderComponent implements OnInit{
   sendOrder() : void {
     const ids = this.order.items.map(({id}) => id);
     this.orderClient.createOrder({ menuItemIds: ids } as CreateOrderCommand).subscribe();
+    
+    this.order = new Order;
+    this.order.items = [];
+    this.displaySuccessSnackBar();
+  }
+
+  displaySuccessSnackBar(): void {
+    this._snackBar.open("Order sent", "close", {
+      duration: 3000,
+      verticalPosition: 'top',
+    });
   }
 
 }
