@@ -2,20 +2,12 @@ import { Component, OnInit, Inject, ViewChild, } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { 
-  MatDialog, 
-  MatDialogModule,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatDialogTitle,
-  MatDialogContent,
-  MatDialogActions,
-  MatDialogClose, } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MAT_DIALOG_DATA, MatDialogRef, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, } from '@angular/material/dialog';
 import { MatTable, MatTableModule } from '@angular/material/table'
 import { CreateMenuItemCommand, MenuItem, MenuItemsClient } from '../../shared/services/web-api-client';
-import {FormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule, Validators, FormControl, FormGroup } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-menu',
@@ -52,9 +44,12 @@ export class MenuComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe({
       next: result => {
-        this.menuClient.createMenuItem(result as CreateMenuItemCommand).subscribe();
-        this.menuItems.push(result);
-        this.table.renderRows();
+        if (result !== undefined)
+        {
+          this.menuClient.createMenuItem(result as CreateMenuItemCommand).subscribe();
+          this.menuItems.push(result);
+          this.table.renderRows();  
+        }
       },
       error: error => console.log(error.error)
     })
@@ -75,24 +70,31 @@ export class MenuComponent implements OnInit{
   selector: 'dialog-app-menu',
   templateUrl: './dialog-menu.component.html',
   standalone: true,
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
-  ]
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, ReactiveFormsModule]
 })
 export class DialogMenuComponent {
+  
   constructor(
     @Inject(MAT_DIALOG_DATA) public menuItem: MenuItem,
     public dialogRef: MatDialogRef<DialogMenuComponent>,
   ) {}
 
+  menuItemForm = new FormGroup({
+    name: new FormControl(this.menuItem.name, [Validators.required]),
+    price: new FormControl(this.menuItem.price, Validators.required),
+  });
+
   onSubmit(menuItem: MenuItem): void {
+    console.log(this.menuItemForm);
+    console.log(this.menuItem);
+    if (menuItem === undefined) {
+      this.dialogRef.close();
+    }
+    
     this.dialogRef.close(menuItem);
+  }
+
+  getErrorMessage() {
+    return 'Value is required'
   }
 }
