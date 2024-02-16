@@ -13,9 +13,10 @@
             <mat-cell *matCellDef="let menuItem"> {{ menuItem.price }}</mat-cell>
         </ng-container>
 
-        <ng-container>
+        <ng-container matColumnDef="button">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let menuItem">
-                <button mat-flat-button color="warn">Remove Item</button>
+                <button mat-flat-button color="warn" (click)="removeItem(menuItem.id)">Remove Item</button>
             </mat-cell>
         </ng-container>
 

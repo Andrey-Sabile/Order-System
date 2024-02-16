@@ -24,7 +24,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 })
 export class MenuComponent implements OnInit{
   public menuItems: MenuItem[] = [];
-  public displayedColumns: string[] = ['name', 'price'];
+  public displayedColumns: string[] = ['name', 'price', 'button',];
   public menuItem: MenuItem;
 
   @ViewChild(MatTable) table: MatTable<MenuItem>;
