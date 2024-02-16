@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { Order, OrdersClient } from '../../shared/services/web-api-client';
+import { Order, OrderDto, OrdersClient, UpdateOrderCommand } from '../../shared/services/web-api-client';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-kitchendisplay',
@@ -10,7 +11,8 @@ import { Order, OrdersClient } from '../../shared/services/web-api-client';
   templateUrl: './kitchendisplay.component.html',
 })
 export class KitchendisplayComponent implements OnInit{
-  public orders: Order[] = [];
+  public orders: OrderDto[] = [];
+  public remainingOrders: OrderDto[];
 
   constructor(
     private orderClient: OrdersClient,
@@ -18,8 +20,17 @@ export class KitchendisplayComponent implements OnInit{
 
   ngOnInit(): void {
     this.orderClient.getOrders().subscribe({
-      next: result => this.orders = result,
+      next: result => {
+        this.orders = result
+        this.remainingOrders = this.orders.filter(order => !order.done)
+      },
       error : error => console.error(error),
+    });
+  }
+
+  orderCompleted(id: number): void {
+    this.orderClient.updateOrder(id, { orderId: id } as UpdateOrderCommand).subscribe({
+      next: result => this.remainingOrders = this.remainingOrders.filter(order => order.id !== id)
     });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { 
   MatDialog, 
@@ -9,7 +9,7 @@ import {
   MatDialogContent,
   MatDialogActions,
   MatDialogClose, } from '@angular/material/dialog';
-import { MatTableModule } from '@angular/material/table'
+import { MatTable, MatTableModule } from '@angular/material/table'
 import { CreateMenuItemCommand, MenuItem, MenuItemsClient } from '../../shared/services/web-api-client';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
@@ -26,6 +26,8 @@ export class MenuComponent implements OnInit{
   public menuItems: MenuItem[] = [];
   public displayedColumns: string[] = ['name', 'price'];
   public menuItem: MenuItem;
+
+  @ViewChild(MatTable) table: MatTable<MenuItem>;
 
   constructor(
     private menuClient: MenuItemsClient,
@@ -47,10 +49,24 @@ export class MenuComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe({
-      next: result => this.menuClient.createMenuItem(result as CreateMenuItemCommand).subscribe(),
+      next: result => {
+        this.menuClient.createMenuItem(result as CreateMenuItemCommand).subscribe();
+        this.menuItems.push(result);
+        this.table.renderRows();
+      },
       error: error => console.log(error.error)
     })
   }
+
+  removeItem(itemId: number): void {
+    this.menuClient.deleteMenuItem(itemId).subscribe({
+      next: result => {
+        this.menuItems = this.menuItems.filter(menuItem => menuItem.id !== itemId);
+        this.table.renderRows();
+      }
+    })
+  } 
+
 }
 
 @Component({
@@ -74,9 +90,6 @@ export class DialogMenuComponent {
     public dialogRef: MatDialogRef<DialogMenuComponent>,
   ) {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
   onSubmit(menuItem: MenuItem): void {
     this.dialogRef.close(menuItem);
   }

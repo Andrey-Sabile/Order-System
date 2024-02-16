@@ -204,6 +204,66 @@
         }
       }
     },
+    "/api/Orders/{id}": {
+      "put": {
+        "tags": [
+          "Orders"
+        ],
+        "operationId": "UpdateOrder",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOrderCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 2
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Orders"
+        ],
+        "operationId": "DeleteOrder",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/api/Orders/UpdateQuantity/{id}": {
       "put": {
         "tags": [
@@ -234,31 +294,6 @@
           "required": true,
           "x-position": 2
         },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/api/Orders/{id}": {
-      "delete": {
-        "tags": [
-          "Orders"
-        ],
-        "operationId": "DeleteOrder",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 1
-          }
-        ],
         "responses": {
           "200": {
             "description": ""
@@ -821,6 +856,16 @@
               "type": "integer",
               "format": "int32"
             }
+          }
+        }
+      },
+      "UpdateOrderCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "orderId": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },

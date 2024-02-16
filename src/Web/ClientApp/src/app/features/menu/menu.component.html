@@ -5,12 +5,18 @@
 
         <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-            <mat-cell *matCellDef="let menuItems"> {{ menuItems.name }}</mat-cell>
+            <mat-cell *matCellDef="let menuItem"> {{ menuItem.name }}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="price">
             <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-            <mat-cell *matCellDef="let menuItems"> {{ menuItems.price }}</mat-cell>
+            <mat-cell *matCellDef="let menuItem"> {{ menuItem.price }}</mat-cell>
+        </ng-container>
+
+        <ng-container>
+            <mat-cell *matCellDef="let menuItem">
+                <button mat-flat-button color="warn">Remove Item</button>
+            </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
