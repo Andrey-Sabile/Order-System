@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject, ViewChild, } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 import { 
   MatDialog, 
   MatDialogModule,
@@ -18,7 +20,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [MatButtonModule, MatTableModule, MatDialogModule, MatFormFieldModule, MatInputModule, FormsModule],
+  imports: [MatButtonModule, MatMenuModule, MatIconModule, MatTableModule, MatDialogModule, MatFormFieldModule, MatInputModule, FormsModule],
   templateUrl: './menu.component.html',
   styles: ``
 })
