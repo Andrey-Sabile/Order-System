@@ -1655,7 +1655,7 @@ export interface IMenuItemOrderDto {
 }
 
 export class CreateOrderCommand implements ICreateOrderCommand {
-    menuItemIds?: number[];
+    items?: NewOrderDto[];
 
     constructor(data?: ICreateOrderCommand) {
         if (data) {
@@ -1668,10 +1668,10 @@ export class CreateOrderCommand implements ICreateOrderCommand {
 
     init(_data?: any) {
         if (_data) {
-            if (Array.isArray(_data["menuItemIds"])) {
-                this.menuItemIds = [] as any;
-                for (let item of _data["menuItemIds"])
-                    this.menuItemIds!.push(item);
+            if (Array.isArray(_data["items"])) {
+                this.items = [] as any;
+                for (let item of _data["items"])
+                    this.items!.push(NewOrderDto.fromJS(item));
             }
         }
     }
@@ -1685,17 +1685,57 @@ export class CreateOrderCommand implements ICreateOrderCommand {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        if (Array.isArray(this.menuItemIds)) {
-            data["menuItemIds"] = [];
-            for (let item of this.menuItemIds)
-                data["menuItemIds"].push(item);
+        if (Array.isArray(this.items)) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJSON());
         }
         return data;
     }
 }
 
 export interface ICreateOrderCommand {
-    menuItemIds?: number[];
+    items?: NewOrderDto[];
+}
+
+export class NewOrderDto implements INewOrderDto {
+    menuItemId?: number;
+    itemQuantity?: number;
+
+    constructor(data?: INewOrderDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.menuItemId = _data["menuItemId"];
+            this.itemQuantity = _data["itemQuantity"];
+        }
+    }
+
+    static fromJS(data: any): NewOrderDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new NewOrderDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["menuItemId"] = this.menuItemId;
+        data["itemQuantity"] = this.itemQuantity;
+        return data;
+    }
+}
+
+export interface INewOrderDto {
+    menuItemId?: number;
+    itemQuantity?: number;
 }
 
 export class UpdateOrderCommand implements IUpdateOrderCommand {

@@ -1,6 +1,7 @@
 using OrderSystem.Application.Orders.Commands;
+using OrderSystem.Application.Orders.Commands.CreateOrder;
+
 using OrderSystem.Application.Orders.Queries;
-using OrderSystem.Domain.Entities;
 
 namespace OrderSystem.Web.Endpoints;
 

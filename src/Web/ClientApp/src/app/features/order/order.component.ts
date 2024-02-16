@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { MenuItem, MenuItemsClient, 
-  Order, OrdersClient, CreateOrderCommand } from '../../shared/services/web-api-client';
+  Order, OrdersClient, CreateOrderCommand, NewOrderDto } from '../../shared/services/web-api-client';
 
 @Component({
   selector: 'app-order',
@@ -15,7 +15,9 @@ import { MenuItem, MenuItemsClient,
 })
 export class OrderComponent implements OnInit{
   public menuItems: MenuItem[] = [];
+  public orderedItems: MenuItem[] = [];
   public order: Order;
+  public newOrder: NewOrderDto[] = [];
 
   constructor(
     private menuClient: MenuItemsClient, 
@@ -33,16 +35,20 @@ export class OrderComponent implements OnInit{
   }
 
   addItem(menuItem: MenuItem) : void {
-    this.order.items.push(menuItem);
+    this.order.items.push(menuItem);// Current work around to display name for now
+    var item = new NewOrderDto({menuItemId: menuItem.id, itemQuantity: 1})
+    if (this.newOrder.filter((item) => item.menuItemId == menuItem.id).length > 0) {
+      this.newOrder.find((item) => item.menuItemId == menuItem.id).itemQuantity++;
+      return;
+    }
+    this.newOrder.push(item); 
   }
 
   sendOrder() : void {
-    const ids = this.order.items.map(({id}) => id);
-    this.orderClient.createOrder({ menuItemIds: ids } as CreateOrderCommand).subscribe();
-    
+    this.orderClient.createOrder({items: this.newOrder} as CreateOrderCommand).subscribe();
+    this.displaySuccessSnackBar();
     this.order = new Order;
     this.order.items = [];
-    this.displaySuccessSnackBar();
   }
 
   displaySuccessSnackBar(): void {

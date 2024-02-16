@@ -850,12 +850,25 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "menuItemIds": {
+          "items": {
             "type": "array",
             "items": {
-              "type": "integer",
-              "format": "int32"
+              "$ref": "#/components/schemas/NewOrderDto"
             }
+          }
+        }
+      },
+      "NewOrderDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "menuItemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itemQuantity": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
