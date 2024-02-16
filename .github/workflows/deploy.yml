@@ -98,7 +98,7 @@ jobs:
       run: |
         unzip -o ./efbundle/efbundle.zip
         echo '{ "ConnectionStrings": { "DefaultConnection": "" } }' > appsettings.json
-        ./efbundle.exe --connection "whatever=${{ steps.deploy.outputs.sqlServerFullyQualifiedDomainName }};Initial Catalog=${{ steps.deploy.outputs.sqlDatabaseName }};Persist Security Info=False;User ID=${{ vars.AZURE_SQL_ADMINISTRATOR_USERNAME }};Password=${{ secrets.AZURE_SQL_ADMINISTRATOR_PASSWORD }};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" --verbose
+        ./efbundle.exe --connection "server=${{ steps.deploy.outputs.sqlServerFullyQualifiedDomainName }};Initial Catalog=${{ steps.deploy.outputs.sqlDatabaseName }};Persist Security Info=False;User ID=${{ vars.AZURE_SQL_ADMINISTRATOR_USERNAME }};Password=${{ secrets.AZURE_SQL_ADMINISTRATOR_PASSWORD }};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" --verbose
 
     - uses: azure/webapps-deploy@v2
       name: Deploy website
