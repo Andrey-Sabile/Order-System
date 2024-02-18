@@ -16,6 +16,7 @@ public class GetOrdersQueryHandler(IApplicationDbContext context, IMapper mapper
             .AsNoTracking()
             .ProjectTo<OrderDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
+        
         return entity;
     }
 }

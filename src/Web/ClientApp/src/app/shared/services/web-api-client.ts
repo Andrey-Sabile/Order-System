@@ -1620,6 +1620,8 @@ export interface IMenuItemDto {
 
 export class MenuItemOrderDto implements IMenuItemOrderDto {
     orderQuantity?: number;
+    menuItemId?: number;
+    name?: string | undefined;
 
     constructor(data?: IMenuItemOrderDto) {
         if (data) {
@@ -1633,6 +1635,8 @@ export class MenuItemOrderDto implements IMenuItemOrderDto {
     init(_data?: any) {
         if (_data) {
             this.orderQuantity = _data["orderQuantity"];
+            this.menuItemId = _data["menuItemId"];
+            this.name = _data["name"];
         }
     }
 
@@ -1646,12 +1650,16 @@ export class MenuItemOrderDto implements IMenuItemOrderDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["orderQuantity"] = this.orderQuantity;
+        data["menuItemId"] = this.menuItemId;
+        data["name"] = this.name;
         return data;
     }
 }
 
 export interface IMenuItemOrderDto {
     orderQuantity?: number;
+    menuItemId?: number;
+    name?: string | undefined;
 }
 
 export class CreateOrderCommand implements ICreateOrderCommand {
