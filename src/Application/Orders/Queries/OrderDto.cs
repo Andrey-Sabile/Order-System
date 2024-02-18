@@ -10,8 +10,6 @@ public class OrderDto
     
     public bool? Done { get; init; } = false;
 
-    public IReadOnlyCollection<MenuItemDto> Items { get; init; } = [];
-
     public IReadOnlyCollection<MenuItemOrderDto> MenuItemOrders { get; init; } = [];
 
     private class Mapping : Profile

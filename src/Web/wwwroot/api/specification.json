@@ -812,27 +812,11 @@
             "type": "boolean",
             "nullable": true
           },
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MenuItemDto"
-            }
-          },
           "menuItemOrders": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MenuItemOrderDto"
             }
-          }
-        }
-      },
-      "MenuItemDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
@@ -847,10 +831,6 @@
           "menuItemId": {
             "type": "integer",
             "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "nullable": true
           }
         }
       },
