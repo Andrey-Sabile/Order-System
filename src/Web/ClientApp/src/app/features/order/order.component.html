@@ -19,7 +19,14 @@
 
     <div class="col-sm-4">
         @for (item of order.items; track order.items) {
-            <h3>{{  order.menuItemOrders }}{{ item.name }} ${{ item.price }}</h3>
+            <mat-card>
+                <mat-card-header>
+                    <h2>{{ order.menuItemOrders }}{{ item.name }} ${{ item.price }}</h2>
+                    <button mat-icon-button (click)="removeItem(item.id)">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-card-header>
+            </mat-card>
         }
         <button mat-flat-button color="primary" (click)="sendOrder()">Send Order</button>
     </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MenuItem, MenuItemsClient, 
   Order, OrdersClient, CreateOrderCommand, NewOrderDto } from '../../shared/services/web-api-client';
@@ -9,7 +10,7 @@ import { MenuItem, MenuItemsClient,
 @Component({
   selector: 'app-order',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, FormsModule],
+  imports: [MatCardModule, MatButtonModule, FormsModule, MatIconModule],
   templateUrl: './order.component.html',
   styles: ``
 })
@@ -56,6 +57,11 @@ export class OrderComponent implements OnInit{
       duration: 3000,
       verticalPosition: 'top',
     });
+  }
+
+  removeItem(itemId: number): void {
+    this.order.items = this.order.items.filter((item) => item.id !== itemId);
+    this.newOrder = this.newOrder.filter((item) => item.menuItemId !== itemId);
   }
 
 }
