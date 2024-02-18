@@ -20,12 +20,12 @@ jobs:
     with:
       build-artifacts: true
 
-  deploy-development:
-    uses: ./.github/workflows/deploy.yml
-    secrets: inherit
-    needs: [ build ]
-    with:
-      environmentName: Development
+  # deploy-development:
+  #   uses: ./.github/workflows/deploy.yml
+  #   secrets: inherit
+  #   needs: [ build ]
+  #   with:
+  #     environmentName: Development
 
   # deploy-staging:
   #   uses: ./.github/workflows/deploy.yml
