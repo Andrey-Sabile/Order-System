@@ -1,5 +1,5 @@
-﻿using OrderSystem.Domain.Events;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using OrderSystem.Domain.Events;
 
 namespace OrderSystem.Application.TodoItems.EventHandlers;
 

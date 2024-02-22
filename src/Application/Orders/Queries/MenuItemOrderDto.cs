@@ -7,7 +7,7 @@ namespace OrderSystem.Application.Orders.Queries
         public int OrderQuantity { get; set; }
 
         public int MenuItemId { get; set; }
-        
+
         private class Mapping : Profile
         {
             public Mapping()

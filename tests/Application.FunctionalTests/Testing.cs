@@ -1,10 +1,10 @@
-﻿using OrderSystem.Domain.Constants;
-using OrderSystem.Infrastructure.Data;
-using OrderSystem.Infrastructure.Identity;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using OrderSystem.Domain.Constants;
+using OrderSystem.Infrastructure.Data;
+using OrderSystem.Infrastructure.Identity;
 
 namespace OrderSystem.Application.FunctionalTests;
 
@@ -99,7 +99,7 @@ public partial class Testing
         {
             await _database.ResetAsync();
         }
-        catch (Exception) 
+        catch (Exception)
         {
         }
 

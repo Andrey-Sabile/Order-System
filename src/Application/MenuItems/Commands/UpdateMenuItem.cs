@@ -15,7 +15,7 @@ public class UpdateMenuItemCommandHandler(IApplicationDbContext context) : IRequ
 
     public async Task Handle(UpdateMenuItemCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _context.MenuItems.FindAsync([ request.Id ], cancellationToken);
+        var entity = await _context.MenuItems.FindAsync([request.Id], cancellationToken);
         Guard.Against.NotFound(request.Id, entity);
 
         entity.Name = request.Name;

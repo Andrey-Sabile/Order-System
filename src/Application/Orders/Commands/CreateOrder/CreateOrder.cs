@@ -15,11 +15,11 @@ public class CreateOrderCommandHandler(IApplicationDbContext context) : IRequest
 
     public async Task<int> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        var order = new Order{};
+        var order = new Order { };
 
         foreach (var item in request.Items)
         {
-            var menuItemEntity = await _context.MenuItems.FindAsync([ item.MenuItemId ], cancellationToken);
+            var menuItemEntity = await _context.MenuItems.FindAsync([item.MenuItemId], cancellationToken);
             Guard.Against.NotFound(item.MenuItemId, menuItemEntity);
             order.Items.Add(menuItemEntity);
 

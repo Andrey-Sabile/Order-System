@@ -1,8 +1,8 @@
 ﻿using System.Data;
 using System.Data.Common;
-using OrderSystem.Infrastructure.Data;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using OrderSystem.Infrastructure.Data;
 
 namespace OrderSystem.Application.FunctionalTests;
 

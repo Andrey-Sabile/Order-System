@@ -1,6 +1,6 @@
-﻿using OrderSystem.Application.Common.Interfaces;
-using MediatR.Pipeline;
+﻿using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
+using OrderSystem.Application.Common.Interfaces;
 
 namespace OrderSystem.Application.Common.Behaviours;
 

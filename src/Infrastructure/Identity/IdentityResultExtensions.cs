@@ -1,5 +1,5 @@
-﻿using OrderSystem.Application.Common.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using OrderSystem.Application.Common.Models;
 
 namespace OrderSystem.Infrastructure.Identity;
 

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
-using OrderSystem.Application.Common.Interfaces;
 using Microsoft.Extensions.Logging;
+using OrderSystem.Application.Common.Interfaces;
 
 namespace OrderSystem.Application.Common.Behaviours;
 

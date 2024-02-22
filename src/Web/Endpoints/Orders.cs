@@ -1,5 +1,4 @@
 using OrderSystem.Application.Orders.Commands;
-using OrderSystem.Application.Orders.Commands.CreateOrder;
 
 using OrderSystem.Application.Orders.Queries;
 
@@ -22,7 +21,7 @@ public class Orders : EndpointGroupBase
     {
         return await sender.Send(new GetOrdersQuery());
     }
-    
+
     public async Task<int> CreateOrder(ISender sender, CreateOrderCommand command)
     {
         return await sender.Send(command);
@@ -39,9 +38,9 @@ public class Orders : EndpointGroupBase
     {
         if (command.Quantity < 0)
             throw new ArgumentOutOfRangeException("Quantity cannot be negative", nameof(command.Quantity));
-        
+
         if (id != command.OrderId) return Results.BadRequest();
-        
+
         await sender.Send(command);
         return Results.NoContent();
     }

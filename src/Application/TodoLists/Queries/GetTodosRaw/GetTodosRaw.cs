@@ -1,6 +1,5 @@
 using OrderSystem.Application.Common.Interfaces;
 using OrderSystem.Application.Common.Security;
-using OrderSystem.Domain.Entities;
 using OrderSystem.Application.TodoLists.Queries.GetTodos;
 
 namespace OrderSystem.Application.TodoLists.Queries.GetTodosRaw;
@@ -8,7 +7,7 @@ namespace OrderSystem.Application.TodoLists.Queries.GetTodosRaw;
 [Authorize]
 public record GetTodosRawQuery : IRequest<IList<TodoListDto>>;
 
-public class GetTodosRawQueryHandler(IApplicationDbContext context, IMapper mapper) : IRequestHandler<GetTodosRawQuery,IList<TodoListDto>>
+public class GetTodosRawQueryHandler(IApplicationDbContext context, IMapper mapper) : IRequestHandler<GetTodosRawQuery, IList<TodoListDto>>
 {
     private readonly IApplicationDbContext _context = context;
     private readonly IMapper _mapper = mapper;

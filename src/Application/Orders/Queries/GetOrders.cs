@@ -1,5 +1,4 @@
 using OrderSystem.Application.Common.Interfaces;
-using OrderSystem.Domain.Entities;
 
 namespace OrderSystem.Application.Orders.Queries;
 
@@ -16,7 +15,7 @@ public class GetOrdersQueryHandler(IApplicationDbContext context, IMapper mapper
             .AsNoTracking()
             .ProjectTo<OrderDto>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
-        
+
         return entity;
     }
 }

@@ -11,10 +11,10 @@ public record GetMenuItemByIdQuery : IRequest<MenuItem>
 public class GetMenuItemByIdQueryHandler(IApplicationDbContext context) : IRequestHandler<GetMenuItemByIdQuery, MenuItem>
 {
     private readonly IApplicationDbContext _context = context;
-    
+
     public async Task<MenuItem> Handle(GetMenuItemByIdQuery request, CancellationToken cancellationToken)
     {
-        var entity = await _context.MenuItems.FindAsync([ request.Id ], cancellationToken);
+        var entity = await _context.MenuItems.FindAsync([request.Id], cancellationToken);
         Guard.Against.NotFound(request.Id, entity);
 
         return entity;

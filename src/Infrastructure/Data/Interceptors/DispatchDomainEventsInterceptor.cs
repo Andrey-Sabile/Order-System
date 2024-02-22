@@ -1,7 +1,7 @@
-﻿using OrderSystem.Domain.Common;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using OrderSystem.Domain.Common;
 
 namespace OrderSystem.Infrastructure.Data.Interceptors;
 

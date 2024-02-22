@@ -1,8 +1,8 @@
-﻿using OrderSystem.Application.Common.Interfaces;
-using OrderSystem.Application.Common.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OrderSystem.Application.Common.Interfaces;
+using OrderSystem.Application.Common.Models;
 
 namespace OrderSystem.Infrastructure.Identity;
 

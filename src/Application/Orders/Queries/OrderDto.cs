@@ -7,7 +7,7 @@ public class OrderDto
     public int? Id { get; init; }
 
     public int? TableNumber { get; init; }
-    
+
     public bool? Done { get; init; } = false;
 
     public IReadOnlyCollection<MenuItemOrderDto> MenuItemOrders { get; init; } = [];

@@ -7,6 +7,6 @@ public class Order : BaseAuditableEntity
     public IList<MenuItem> Items { get; set; } = [];
 
     public IList<MenuItemOrder> MenuItemOrders { get; set; } = [];
-    
+
     public bool? Done { get; set; } = false;
 }

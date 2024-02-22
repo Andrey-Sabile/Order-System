@@ -1,12 +1,12 @@
-﻿using OrderSystem.Application.Common.Interfaces;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Configuration;
+using OrderSystem.Application.Common.Interfaces;
 using OrderSystem.Domain.Constants;
 using OrderSystem.Infrastructure.Data;
 using OrderSystem.Infrastructure.Data.Interceptors;
 using OrderSystem.Infrastructure.Identity;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

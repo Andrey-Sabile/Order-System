@@ -17,9 +17,9 @@ public class UpdateOrderQuantityCommandHandler(IApplicationDbContext context) : 
 
     public async Task Handle(UpdateOrderQuantityCommand request, CancellationToken cancellationToken)
     {
-        var menuItemOrderEntity = await _context.MenuItemOrders.FindAsync([ request.OrderId, request.MenuItemId ], cancellationToken);
-        Guard.Against.NotFound( request.OrderId, menuItemOrderEntity);
-        Guard.Against.NotFound( request.MenuItemId, menuItemOrderEntity);
+        var menuItemOrderEntity = await _context.MenuItemOrders.FindAsync([request.OrderId, request.MenuItemId], cancellationToken);
+        Guard.Against.NotFound(request.OrderId, menuItemOrderEntity);
+        Guard.Against.NotFound(request.MenuItemId, menuItemOrderEntity);
 
         menuItemOrderEntity.OrderQuantity = request.Quantity;
 

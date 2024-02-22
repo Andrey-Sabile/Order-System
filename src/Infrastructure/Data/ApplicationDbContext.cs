@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using OrderSystem.Application.Common.Interfaces;
 using OrderSystem.Domain.Entities;
 using OrderSystem.Infrastructure.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 
 namespace OrderSystem.Infrastructure.Data;
 

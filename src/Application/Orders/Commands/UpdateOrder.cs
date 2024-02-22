@@ -13,8 +13,8 @@ public class UpdateOrderCommandHandler(IApplicationDbContext context) : IRequest
 
     public async Task Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
     {
-        var orderEntity = await _context.Orders.FindAsync([ request.OrderId ], cancellationToken);
-        Guard.Against.NotFound( request.OrderId, orderEntity);
+        var orderEntity = await _context.Orders.FindAsync([request.OrderId], cancellationToken);
+        Guard.Against.NotFound(request.OrderId, orderEntity);
 
         orderEntity.Done = true;
 

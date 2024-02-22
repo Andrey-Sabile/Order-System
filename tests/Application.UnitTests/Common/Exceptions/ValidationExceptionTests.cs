@@ -1,7 +1,7 @@
-﻿using OrderSystem.Application.Common.Exceptions;
-using FluentAssertions;
+﻿using FluentAssertions;
 using FluentValidation.Results;
 using NUnit.Framework;
+using OrderSystem.Application.Common.Exceptions;
 
 namespace OrderSystem.Application.UnitTests.Common.Exceptions;
 

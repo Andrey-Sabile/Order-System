@@ -1,6 +1,4 @@
 ﻿using System.Data.Common;
-using OrderSystem.Application.Common.Interfaces;
-using OrderSystem.Infrastructure.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -8,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using OrderSystem.Application.Common.Interfaces;
+using OrderSystem.Infrastructure.Data;
 
 namespace OrderSystem.Application.FunctionalTests;
 

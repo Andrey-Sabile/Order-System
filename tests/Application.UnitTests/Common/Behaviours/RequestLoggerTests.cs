@@ -1,9 +1,9 @@
-﻿using OrderSystem.Application.Common.Behaviours;
-using OrderSystem.Application.Common.Interfaces;
-using OrderSystem.Application.TodoItems.Commands.CreateTodoItem;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
+using OrderSystem.Application.Common.Behaviours;
+using OrderSystem.Application.Common.Interfaces;
+using OrderSystem.Application.TodoItems.Commands.CreateTodoItem;
 
 namespace OrderSystem.Application.UnitTests.Common.Behaviours;
 

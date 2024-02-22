@@ -1,7 +1,7 @@
-﻿using OrderSystem.Domain.Exceptions;
-using OrderSystem.Domain.ValueObjects;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
+using OrderSystem.Domain.Exceptions;
+using OrderSystem.Domain.ValueObjects;
 
 namespace OrderSystem.Domain.UnitTests.ValueObjects;
 

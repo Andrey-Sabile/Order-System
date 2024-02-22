@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 using System.Runtime.Serialization;
 using AutoMapper;
+using NUnit.Framework;
 using OrderSystem.Application.Common.Interfaces;
 using OrderSystem.Application.Common.Models;
 using OrderSystem.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 using OrderSystem.Application.TodoLists.Queries.GetTodos;
 using OrderSystem.Domain.Entities;
-using NUnit.Framework;
 
 namespace OrderSystem.Application.UnitTests.Common.Mappings;
 
@@ -17,7 +17,7 @@ public class MappingTests
 
     public MappingTests()
     {
-        _configuration = new MapperConfiguration(config => 
+        _configuration = new MapperConfiguration(config =>
             config.AddMaps(Assembly.GetAssembly(typeof(IApplicationDbContext))));
 
         _mapper = _configuration.CreateMapper();

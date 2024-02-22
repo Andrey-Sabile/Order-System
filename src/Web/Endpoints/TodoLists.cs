@@ -3,7 +3,6 @@ using OrderSystem.Application.TodoLists.Commands.DeleteTodoList;
 using OrderSystem.Application.TodoLists.Commands.UpdateTodoList;
 using OrderSystem.Application.TodoLists.Queries.GetTodos;
 using OrderSystem.Application.TodoLists.Queries.GetTodosRaw;
-using OrderSystem.Domain.Entities;
 
 namespace OrderSystem.Web.Endpoints;
 

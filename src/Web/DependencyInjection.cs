@@ -1,9 +1,8 @@
 ﻿using Azure.Identity;
+using Microsoft.AspNetCore.Mvc;
 using OrderSystem.Application.Common.Interfaces;
 using OrderSystem.Infrastructure.Data;
 using OrderSystem.Web.Services;
-using Microsoft.AspNetCore.Mvc;
-
 using ZymLabs.NSwag.FluentValidation;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -45,7 +44,7 @@ public static class DependencyInjection
 
 
             // Add the fluent validations schema processor
-            var fluentValidationSchemaProcessor = 
+            var fluentValidationSchemaProcessor =
                 sp.CreateScope().ServiceProvider.GetRequiredService<FluentValidationSchemaProcessor>();
 
             configure.SchemaSettings.SchemaProcessors.Add(fluentValidationSchemaProcessor);

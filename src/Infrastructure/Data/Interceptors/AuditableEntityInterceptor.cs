@@ -1,8 +1,8 @@
-﻿using OrderSystem.Application.Common.Interfaces;
-using OrderSystem.Domain.Common;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using OrderSystem.Application.Common.Interfaces;
+using OrderSystem.Domain.Common;
 
 namespace OrderSystem.Infrastructure.Data.Interceptors;
 
@@ -37,7 +37,7 @@ public class AuditableEntityInterceptor(
             {
                 entry.Entity.CreatedBy = _user.Id;
                 entry.Entity.Created = _dateTime.GetUtcNow();
-            } 
+            }
 
             if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())
             {
@@ -51,8 +51,8 @@ public class AuditableEntityInterceptor(
 public static class Extensions
 {
     public static bool HasChangedOwnedEntities(this EntityEntry entry) =>
-        entry.References.Any(r => 
-            r.TargetEntry != null && 
-            r.TargetEntry.Metadata.IsOwned() && 
+        entry.References.Any(r =>
+            r.TargetEntry != null &&
+            r.TargetEntry.Metadata.IsOwned() &&
             (r.TargetEntry.State == EntityState.Added || r.TargetEntry.State == EntityState.Modified));
 }

@@ -24,9 +24,9 @@ public class MenuItems : EndpointGroupBase
 
     public async Task<MenuItem> GetMenuItemById(ISender sender, [AsParameters] GetMenuItemByIdQuery query)
     {
-        if (query.Id < 0) 
+        if (query.Id < 0)
             throw new ArgumentOutOfRangeException("Id must not be negative", nameof(query.Id));
-        
+
         return await sender.Send(query);
     }
 
