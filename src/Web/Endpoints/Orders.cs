@@ -37,7 +37,11 @@ public class Orders : EndpointGroupBase
 
     public async Task<IResult> UpdateOrderQuantity(ISender sender, int id, UpdateOrderQuantityCommand command)
     {
+        if (command.Quantity < 0)
+            throw new ArgumentOutOfRangeException("Quantity cannot be negative", nameof(command.Quantity));
+        
         if (id != command.OrderId) return Results.BadRequest();
+        
         await sender.Send(command);
         return Results.NoContent();
     }

@@ -633,7 +633,9 @@
               },
               "price": {
                 "type": "integer",
-                "format": "int32"
+                "format": "int32",
+                "maximum": 2147483647.0,
+                "minimum": 0.0
               },
               "orders": {
                 "type": "array",

@@ -43,6 +43,7 @@ export class OrderComponent implements OnInit{
       return;
     }
     this.newOrder.push(item); 
+    this.orderClient.getOrdersUpdated();
   }
 
   sendOrder() : void {

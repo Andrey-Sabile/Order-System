@@ -24,11 +24,20 @@ public class MenuItems : EndpointGroupBase
 
     public async Task<MenuItem> GetMenuItemById(ISender sender, [AsParameters] GetMenuItemByIdQuery query)
     {
+        if (query.Id < 0) 
+            throw new ArgumentOutOfRangeException("Id must not be negative", nameof(query.Id));
+        
         return await sender.Send(query);
     }
 
     public async Task<int> CreateMenuItem(ISender sender, CreateMenuItemCommand command)
     {
+        if (String.IsNullOrWhiteSpace(command.Name))
+            throw new ArgumentNullException("Name must not be null or empty", nameof(command.Name));
+
+        if (command.Price < 0)
+            throw new ArgumentOutOfRangeException("Price must not be negative", nameof(command.Price));
+
         return await sender.Send(command);
     }
 
