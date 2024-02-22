@@ -8,7 +8,7 @@
 /* eslint-disable */
 // ReSharper disable InconsistentNaming
 
-import { interval, switchMap, startWith } from 'rxjs';
+import { interval, switchMap, startWith, repeat } from 'rxjs';
 import { mergeMap as _observableMergeMap, catchError as _observableCatch } from 'rxjs/operators';
 import { Observable, throwError as _observableThrow, of as _observableOf } from 'rxjs';
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
@@ -318,10 +318,10 @@ export class OrdersClient implements IOrdersClient {
 
     
     getOrdersUpdated(): Observable<OrderDto[]> {
-        return interval(5000).pipe(
-            startWith(0),
-            switchMap(() => this.getOrders()),
-        )
+        return this.getOrders()
+            .pipe(
+                repeat({delay:3000})
+            )
       }
 
     getOrders(): Observable<OrderDto[]> {
