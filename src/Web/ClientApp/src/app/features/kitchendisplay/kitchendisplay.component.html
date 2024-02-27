@@ -1,5 +1,6 @@
-@for (order of remainingOrders; track order.done) {
-        <mat-card>
+<div class="d-flex justify-content-start">
+    @for (order of remainingOrders; track order.done) {
+        <mat-card w-25 h-25>
             <mat-card-header>
                 <mat-card-title>
                     Order no: {{ order.id }}
@@ -13,8 +14,6 @@
             <mat-card-actions>
                 <button mat-flat-button color="primary" (click)="orderCompleted(order.id)">Done</button>
             </mat-card-actions>
-    
-        </mat-card>
-    
-    
-}
+        </mat-card>   
+    }
+</div>

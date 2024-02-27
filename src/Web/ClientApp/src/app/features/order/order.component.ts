@@ -43,10 +43,14 @@ export class OrderComponent implements OnInit{
       return;
     }
     this.newOrder.push(item); 
-    this.orderClient.getOrdersUpdated();
   }
 
   sendOrder() : void {
+    if (this.newOrder.length <= 0) {
+      this.displayEmptyOrderSnackBar();
+      return;
+    }
+
     this.orderClient.createOrder({items: this.newOrder} as CreateOrderCommand).subscribe();
     this.displaySuccessSnackBar();
     this.order = new Order;
@@ -58,6 +62,13 @@ export class OrderComponent implements OnInit{
       duration: 3000,
       verticalPosition: 'top',
     });
+  }
+
+  displayEmptyOrderSnackBar(): void {
+    this._snackBar.open("Order empty!!", "close", {
+      duration: 3000,
+      verticalPosition: 'top',
+    })
   }
 
   removeItem(itemId: number): void {

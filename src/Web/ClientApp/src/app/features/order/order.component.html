@@ -1,14 +1,14 @@
 <h1>Orders</h1>
 <div class="row">
     <div class="col-sm-8">
-        <div class="d-flex justify-content-evenly flex-wrap gap-1">
+        <div class="d-flex justify-content-center flex-wrap gap-3">
             @for (menuItem of menuItems; track menuItem.id) {
-                <mat-card class="mat-elevation-z2 w-25">
+                <mat-card class="mat-elevation-z8 w-25">
+                    <img mat-card-image src="../../../assets/photos/photo1.jpg">
                     <mat-card-header>
-                        <mat-card-title>{{ menuItem.name }}</mat-card-title>
+                        <mat-card-title><strong>{{ menuItem.name }}</strong></mat-card-title>
                         <mat-card-subtitle>${{ menuItem.price }}</mat-card-subtitle>
                     </mat-card-header>
-                    <img mat-card-image src="../../../assets/photos/photo1.jpg">
                     <mat-card-actions>
                         <button mat-stroked-button (click)="addItem(menuItem)">Add</button>
                     </mat-card-actions>
@@ -18,16 +18,16 @@
     </div>
 
     <div class="col-sm-4">
+        <button mat-flat-button color="primary" (click)="sendOrder()">Send Order</button>
         @for (item of order.items; track order.items) {
-            <mat-card>
+            <mat-card class="mat-elevation-z8">
                 <mat-card-header>
-                    <h2>{{ order.menuItemOrders }}{{ item.name }} ${{ item.price }}</h2>
-                    <button mat-icon-button (click)="removeItem(item.id)">
+                    <h3>{{ order.menuItemOrders }}{{ item.name }} ${{ item.price }}</h3>
+                    <button class="float-end" mat-icon-button (click)="removeItem(item.id)">
                         <mat-icon>cancel</mat-icon>
                     </button>
                 </mat-card-header>
             </mat-card>
         }
-        <button mat-flat-button color="primary" (click)="sendOrder()">Send Order</button>
     </div>
 </div>
