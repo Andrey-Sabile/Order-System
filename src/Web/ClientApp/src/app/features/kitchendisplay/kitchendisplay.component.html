@@ -1,19 +1,21 @@
-@for (order of remainingOrders; track order.done) {
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">
-                Order no: {{ order.id }}
-            </h5>
-            <ul class="list-group-flush">
-                @for (item of order.menuItemOrders; track item) {
-                    <li class="list-group-item">
-                        {{ item.orderQuantity }} {{ getItemName(item.menuItemId) }}
-                    </li>
-                }
-            </ul>
-            <button type="button" class="btn btn-primary" (click)="orderCompleted(order.id)">
-                Done
-            </button>
+<div class="row">
+    @for (order of remainingOrders; track order.done) {
+        <div class="card col-2">
+            <div class="card-body">
+                <h5 class="card-title">
+                    Order no: {{ order.id }}
+                </h5>
+                <ul class="list-group-flush">
+                    @for (item of order.menuItemOrders; track item) {
+                        <li class="list-group-item">
+                            {{ item.orderQuantity }} {{ getItemName(item.menuItemId) }}
+                        </li>
+                    }
+                </ul>
+                <button type="button" class="btn btn-primary" (click)="orderCompleted(order.id)">
+                    Done
+                </button>
+            </div>
         </div>
-    </div>
-}
+    }    
+</div>
