@@ -1,19 +1,19 @@
-<div class="d-flex justify-content-start">
-    @for (order of remainingOrders; track order.done) {
-        <mat-card w-25 h-25>
-            <mat-card-header>
-                <mat-card-title>
-                    Order no: {{ order.id }}
-                </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
+@for (order of remainingOrders; track order.done) {
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">
+                Order no: {{ order.id }}
+            </h5>
+            <ul class="list-group-flush">
                 @for (item of order.menuItemOrders; track item) {
-                    <li>{{ item.orderQuantity }} {{ getItemName(item.menuItemId) }}</li>
+                    <li class="list-group-item">
+                        {{ item.orderQuantity }} {{ getItemName(item.menuItemId) }}
+                    </li>
                 }
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-flat-button color="primary" (click)="orderCompleted(order.id)">Done</button>
-            </mat-card-actions>
-        </mat-card>   
-    }
-</div>
+            </ul>
+            <button type="button" class="btn btn-primary" (click)="orderCompleted(order.id)">
+                Done
+            </button>
+        </div>
+    </div>
+}
