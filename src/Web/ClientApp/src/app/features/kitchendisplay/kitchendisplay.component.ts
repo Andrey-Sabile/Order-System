@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { OrderDto, OrdersClient, UpdateOrderCommand, MenuItem, MenuItemsClient } from '../../shared/services/web-api-client';
 
 @Component({
   selector: 'app-kitchendisplay',
   standalone: true,
-  imports: [MatButtonModule, MatCardModule],
+  imports: [],
   templateUrl: './kitchendisplay.component.html',
 })
 export class KitchendisplayComponent implements OnInit{
