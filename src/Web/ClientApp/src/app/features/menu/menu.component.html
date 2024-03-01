@@ -1,31 +1,56 @@
-<h1>Menu</h1>
 <div class="row">
-    <button mat-flat-button color="primary" (click)="openDialog()">Add Item</button>
-    <mat-table mat-table [dataSource]="menuItems" class="mat-elevation-z8">
+    <div class="col">
+        <h1>Menu</h1>
+    </div>
+    <div class="col">
+        <button class="btn btn-primary float-end" type="button" data-bs-toggle="modal" data-bs-target="#newItemModal">Add Item</button>
+    </div>
+</div>
 
-        <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-            <mat-cell *matCellDef="let menuItem"> {{ menuItem.name }}</mat-cell>
-        </ng-container>
+<div class="row">
+    <ul class="list-group">
+        @for (menuItem of menuItems; track menuItem) {
+            <li class="list-group-item">
+                {{menuItem.name}} 
+                <div class="float-end">
+                    ${{menuItem.price}}
+                    <div class="dropdown float-end">
+                        <button class="btn btn-default" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><button class="btn btn-default dropdown-item" (click)="removeItem(menuItem.id)">Remove item</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
 
-        <ng-container matColumnDef="price">
-            <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-            <mat-cell *matCellDef="let menuItem"> {{ menuItem.price }}</mat-cell>
-        </ng-container>
+<!--Modal-->
+<div class="modal fade" id="newItemModal">
+    <div class="modal-dialog modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">New Item</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
 
-        <ng-container matColumnDef="button">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let menuItem">
-                <button mat-icon-button [matMenuTriggerFor]="itemMenu" aria-label="Menu Icon">
-                    <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #itemMenu="matMenu">
-                    <button mat-menu-item (click)="removeItem(menuItem.id)">Remove item</button>
-                </mat-menu>
-            </mat-cell>
-        </ng-container>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="newMenuItem.name">
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" [(ngModel)]="newMenuItem.price">
+            </div>
+        </div>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
+        <div class="modal-footer">
+            <div class="float-end">
+                <button class="btn btn-primary" (click)="addItem(this.newMenuItem)" data-bs-dismiss="modal">Add Item</button>
+            </div>
+        </div>
+    </div>
 </div>
