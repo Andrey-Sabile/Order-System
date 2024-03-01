@@ -11,17 +11,19 @@
     <ul class="list-group">
         @for (menuItem of menuItems; track menuItem) {
             <li class="list-group-item">
-                {{menuItem.name}} 
-                <div class="float-end">
+                <div class="d-flex align-items-center">
+                    <div class="flex-fill">
+                        {{menuItem.name}}
+                    </div>
                     ${{menuItem.price}}
-                    <div class="dropdown float-end">
-                        <button class="btn btn-default" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="dropdown">
+                        <button class="btn btn-default btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-three-dots-vertical"></i>
                         </button>
                         <ul class="dropdown-menu">
                             <li><button class="btn btn-default dropdown-item" (click)="removeItem(menuItem.id)">Remove item</button></li>
                         </ul>
-                    </div>
+                    </div>    
                 </div>
             </li>
         }
