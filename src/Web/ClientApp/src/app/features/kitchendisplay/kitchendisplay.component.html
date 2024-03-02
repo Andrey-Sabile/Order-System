@@ -11,7 +11,7 @@
                 <ul class="list-group-flush">
                     @for (item of order.menuItemOrders; track item) {
                         <li class="list-group-item">
-                            {{ item.orderQuantity }} {{ getItemName(item.menuItemId) }}
+                            {{ item.orderQuantity }} {{ item.name }}
                         </li>
                     }
                 </ul>
