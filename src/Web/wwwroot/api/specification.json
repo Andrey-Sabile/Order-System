@@ -840,6 +840,11 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "tableNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "items": {
             "type": "array",
             "items": {

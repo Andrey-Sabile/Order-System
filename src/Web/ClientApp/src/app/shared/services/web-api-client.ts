@@ -1620,6 +1620,7 @@ export interface IMenuItemOrderDto {
 }
 
 export class CreateOrderCommand implements ICreateOrderCommand {
+    tableNumber?: number | undefined;
     items?: NewOrderDto[];
 
     constructor(data?: ICreateOrderCommand) {
@@ -1633,6 +1634,7 @@ export class CreateOrderCommand implements ICreateOrderCommand {
 
     init(_data?: any) {
         if (_data) {
+            this.tableNumber = _data["tableNumber"];
             if (Array.isArray(_data["items"])) {
                 this.items = [] as any;
                 for (let item of _data["items"])
@@ -1650,6 +1652,7 @@ export class CreateOrderCommand implements ICreateOrderCommand {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["tableNumber"] = this.tableNumber;
         if (Array.isArray(this.items)) {
             data["items"] = [];
             for (let item of this.items)
@@ -1660,6 +1663,7 @@ export class CreateOrderCommand implements ICreateOrderCommand {
 }
 
 export interface ICreateOrderCommand {
+    tableNumber?: number | undefined;
     items?: NewOrderDto[];
 }
 

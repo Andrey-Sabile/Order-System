@@ -16,6 +16,7 @@ export class OrderComponent implements OnInit{
   public orderedItems: MenuItem[] = [];
   public order: Order;
   public newOrder: NewOrderDto[] = [];
+  public tableNumber: any = {};
 
   constructor(
     private menuClient: MenuItemsClient, 
@@ -48,10 +49,18 @@ export class OrderComponent implements OnInit{
       return;
     }
 
-    this.orderClient.createOrder({items: this.newOrder} as CreateOrderCommand).subscribe();
+    const command = {
+      tableNumber: this.tableNumber,
+      items: this.newOrder
+    } as CreateOrderCommand
+    this.orderClient.createOrder(command).subscribe();
+    
     this.displaySuccessSnackBar();
+    
     this.order = new Order;
     this.order.items = [];
+    this.newOrder = [];
+    this.tableNumber = {};
   }
 
   displaySuccessSnackBar(): void {

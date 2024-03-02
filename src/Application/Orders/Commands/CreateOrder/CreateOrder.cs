@@ -6,6 +6,7 @@ namespace OrderSystem.Application.Orders.Commands;
 
 public record CreateOrderCommand : IRequest<int>
 {
+    public int? TableNumber { get; init; }
     public required IEnumerable<NewOrderDto> Items { get; init; }
 }
 
@@ -15,7 +16,10 @@ public class CreateOrderCommandHandler(IApplicationDbContext context) : IRequest
 
     public async Task<int> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        var order = new Order { };
+        var order = new Order
+        {
+            TableNumber = request.TableNumber
+        };
 
         foreach (var item in request.Items)
         {
