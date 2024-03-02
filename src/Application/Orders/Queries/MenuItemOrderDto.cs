@@ -8,11 +8,13 @@ namespace OrderSystem.Application.Orders.Queries
 
         public int MenuItemId { get; set; }
 
+        public string? Name { get; set; }
+
         private class Mapping : Profile
         {
             public Mapping()
             {
-                CreateMap<MenuItemOrder, MenuItemOrderDto>();
+                CreateMap<MenuItemOrder, MenuItemOrderDto>().IncludeMembers(s => s.MenuItem);
                 CreateMap<MenuItem, MenuItemOrderDto>();
             }
         }
