@@ -1374,6 +1374,8 @@ export class MenuItemOrder extends BaseAuditableEntity implements IMenuItemOrder
     orderId?: number;
     menuItemId?: number;
     orderQuantity?: number;
+    order?: Order;
+    menuItem?: MenuItem;
 
     constructor(data?: IMenuItemOrder) {
         super(data);
@@ -1385,6 +1387,8 @@ export class MenuItemOrder extends BaseAuditableEntity implements IMenuItemOrder
             this.orderId = _data["orderId"];
             this.menuItemId = _data["menuItemId"];
             this.orderQuantity = _data["orderQuantity"];
+            this.order = _data["order"] ? Order.fromJS(_data["order"]) : <any>undefined;
+            this.menuItem = _data["menuItem"] ? MenuItem.fromJS(_data["menuItem"]) : <any>undefined;
         }
     }
 
@@ -1400,6 +1404,8 @@ export class MenuItemOrder extends BaseAuditableEntity implements IMenuItemOrder
         data["orderId"] = this.orderId;
         data["menuItemId"] = this.menuItemId;
         data["orderQuantity"] = this.orderQuantity;
+        data["order"] = this.order ? this.order.toJSON() : <any>undefined;
+        data["menuItem"] = this.menuItem ? this.menuItem.toJSON() : <any>undefined;
         super.toJSON(data);
         return data;
     }
@@ -1409,6 +1415,8 @@ export interface IMenuItemOrder extends IBaseAuditableEntity {
     orderId?: number;
     menuItemId?: number;
     orderQuantity?: number;
+    order?: Order;
+    menuItem?: MenuItem;
 }
 
 export abstract class BaseEvent implements IBaseEvent {

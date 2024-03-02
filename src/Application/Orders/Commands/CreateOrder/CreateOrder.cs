@@ -31,7 +31,9 @@ public class CreateOrderCommandHandler(IApplicationDbContext context) : IRequest
             {
                 OrderId = order.Id,
                 MenuItemId = menuItemEntity.Id,
-                OrderQuantity = item.ItemQuantity
+                OrderQuantity = item.ItemQuantity,
+                Order = order,
+                MenuItem = menuItemEntity
             };
             order.MenuItemOrders.Add(menuItemOrder);
         }

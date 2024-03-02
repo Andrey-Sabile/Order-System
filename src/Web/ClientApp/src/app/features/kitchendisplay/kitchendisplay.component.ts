@@ -35,7 +35,7 @@ export class KitchendisplayComponent implements OnInit{
 
   orderCompleted(id: number): void {
     this.orderClient.updateOrder(id, { orderId: id } as UpdateOrderCommand).subscribe({
-      next: result => this.remainingOrders = this.remainingOrders.filter(order => order.id !== id)
+      next: () => this.remainingOrders = this.remainingOrders.filter(order => order.id !== id)
     });
   }
 

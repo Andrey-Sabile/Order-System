@@ -707,6 +707,12 @@
               "orderQuantity": {
                 "type": "integer",
                 "format": "int32"
+              },
+              "order": {
+                "$ref": "#/components/schemas/Order"
+              },
+              "menuItem": {
+                "$ref": "#/components/schemas/MenuItem"
               }
             }
           }
