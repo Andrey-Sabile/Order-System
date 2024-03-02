@@ -13,9 +13,9 @@ import { MenuItem, MenuItemsClient,
 })
 export class OrderComponent implements OnInit{
   public menuItems: MenuItem[] = [];
-  public orderedItems: MenuItem[] = [];
   public order: Order;
   public newOrder: NewOrderDto[] = [];
+  public orderDto: NewOrderDto[] = [];
   public tableNumber?: number | undefined;
 
   constructor(
@@ -33,14 +33,27 @@ export class OrderComponent implements OnInit{
     this.order.items = [];
   }
 
-  addItem(menuItem: MenuItem) : void {
-    this.order.items.push(menuItem);// Current work around to display name for now
-    var item = new NewOrderDto({menuItemId: menuItem.id, itemQuantity: 1})
-    if (this.newOrder.filter((item) => item.menuItemId == menuItem.id).length > 0) {
-      this.newOrder.find((item) => item.menuItemId == menuItem.id).itemQuantity++;
+  addItem(menuItem: MenuItem) : void {    
+    if (this.itemExistInOrder(menuItem.id)) {
+      this.increaseItemQuantity(menuItem.id);
       return;
     }
-    this.newOrder.push(item); 
+
+    this.order.items.push(menuItem);// Current work around to display name for now
+    var item = new NewOrderDto({menuItemId: menuItem.id, itemQuantity: 1})
+    this.newOrder.push(item);
+  }
+
+  itemExistInOrder(id: number): boolean {
+    return this.newOrder.filter((item) => item.menuItemId == id).length > 0;
+  }
+
+  increaseItemQuantity(id: number): void {
+    this.newOrder.find((item) => item.menuItemId == id).itemQuantity++;
+  } 
+
+  getItemQuantity(id: number): number {
+    return this.newOrder.find((item) => item.menuItemId == id).itemQuantity; 
   }
 
   sendOrder() : void {
@@ -81,5 +94,4 @@ export class OrderComponent implements OnInit{
     this.order.items = this.order.items.filter((item) => item.id !== itemId);
     this.newOrder = this.newOrder.filter((item) => item.menuItemId !== itemId);
   }
-
 }
