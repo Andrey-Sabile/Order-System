@@ -18,7 +18,7 @@ public class CreateOrderCommandHandler(IApplicationDbContext context) : IRequest
     {
         var order = new Order
         {
-            TableNumber = request.TableNumber
+            TableNumber = request.TableNumber ?? 0
         };
 
         foreach (var item in request.Items)

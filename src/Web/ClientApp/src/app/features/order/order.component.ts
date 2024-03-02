@@ -16,7 +16,7 @@ export class OrderComponent implements OnInit{
   public orderedItems: MenuItem[] = [];
   public order: Order;
   public newOrder: NewOrderDto[] = [];
-  public tableNumber: any = {};
+  public tableNumber?: number | undefined;
 
   constructor(
     private menuClient: MenuItemsClient, 
@@ -60,7 +60,7 @@ export class OrderComponent implements OnInit{
     this.order = new Order;
     this.order.items = [];
     this.newOrder = [];
-    this.tableNumber = {};
+    this.tableNumber = null;
   }
 
   displaySuccessSnackBar(): void {
