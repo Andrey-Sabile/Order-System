@@ -19,6 +19,11 @@ code {
   color: #e01a76;
 }
 
+.card img {
+  max-height: 15vh;
+  object-fit: cover;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
