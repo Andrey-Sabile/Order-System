@@ -98,8 +98,6 @@
       "enumStyle": "Enum",
       "useLeafType": false,
       "classTypes": [],
-      "extendedClasses": ["OrdersClient"],
-      "extensionCode": "ClientApp/src/app/shared/services/web-api-client.extended.ts",
       "generateDefaultValues": true,
       "excludedTypeNames": [],
       "excludedParameterNames": [],

@@ -33,7 +33,7 @@ public class MenuItems : EndpointGroupBase
     public async Task<int> CreateMenuItem(ISender sender, CreateMenuItemCommand command)
     {
         if (String.IsNullOrWhiteSpace(command.Name))
-            throw new ArgumentNullException("Name must not be null or empty", nameof(command.Name));
+            throw new ArgumentNullException("Name must not be empty", nameof(command.Name));
 
         if (command.Price < 0)
             throw new ArgumentOutOfRangeException("Price must not be negative", nameof(command.Price));
