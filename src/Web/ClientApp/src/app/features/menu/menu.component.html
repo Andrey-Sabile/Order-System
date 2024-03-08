@@ -21,7 +21,8 @@
                             <i class="bi bi-three-dots-vertical"></i>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><button class="btn btn-default dropdown-item" (click)="removeItem(menuItem.id)">Remove item</button></li>
+                            <li><button class="btn btn-default dropdown-item" (click)="setItemToUpdate(menuItem)" type="button" data-bs-toggle="modal" data-bs-target="#updateItemModal">Update</button></li>
+                            <li><button class="btn btn-default dropdown-item" (click)="removeItem(menuItem.id)">Remove</button></li>
                         </ul>
                     </div>    
                 </div>
@@ -30,7 +31,7 @@
     </ul>
 </div>
 
-<!--Modal-->
+<!--Modals-->
 <div class="modal fade" id="newItemModal">
     <div class="modal-dialog modal-content">
         <div class="modal-header">
@@ -52,6 +53,32 @@
         <div class="modal-footer">
             <div class="float-end">
                 <button class="btn btn-primary" (click)="addItem(this.newMenuItem)" data-bs-dismiss="modal">Add Item</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateItemModal">
+    <div class="modal-dialog modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Update Item</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" value="{{selectedMenuItem.name}}" [(ngModel)]="selectedMenuItem.name">
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" value="{{selectedMenuItem.price}}" [(ngModel)]="selectedMenuItem.price">
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <div class="float-end">
+                <button class="btn btn-primary" (click)="updateItem(this.selectedMenuItem)" data-bs-dismiss="modal">Update Item</button>
             </div>
         </div>
     </div>
