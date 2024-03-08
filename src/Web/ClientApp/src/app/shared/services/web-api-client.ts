@@ -1439,8 +1439,8 @@ export interface IBaseEvent {
 }
 
 export class CreateMenuItemCommand implements ICreateMenuItemCommand {
-    name?: string | undefined;
-    price?: number;
+    name!: string | undefined;
+    price!: number;
 
     constructor(data?: ICreateMenuItemCommand) {
         if (data) {
@@ -1474,8 +1474,8 @@ export class CreateMenuItemCommand implements ICreateMenuItemCommand {
 }
 
 export interface ICreateMenuItemCommand {
-    name?: string | undefined;
-    price?: number;
+    name: string | undefined;
+    price: number;
 }
 
 export class UpdateMenuItemCommand implements IUpdateMenuItemCommand {

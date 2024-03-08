@@ -6,7 +6,8 @@ namespace OrderSystem.Application.MenuItems.Commands.CreateMenuItem;
 
 public record CreateMenuItemCommand : IRequest<int>
 {
-    public required NewMenuItemDto NewMenuItem { get; init; }
+    public string? Name { get; init; }
+    public int Price { get; init; }
 }
 
 public class CreateMenuItemCommandHandler(IApplicationDbContext context) : IRequestHandler<CreateMenuItemCommand, int>
@@ -17,8 +18,8 @@ public class CreateMenuItemCommandHandler(IApplicationDbContext context) : IRequ
     {
         var entity = new MenuItem
         {
-            Name = request.NewMenuItem.Name,
-            Price = request.NewMenuItem.Price,
+            Name = request.Name,
+            Price = request.Price,
         };
 
         _context.MenuItems.Add(entity);

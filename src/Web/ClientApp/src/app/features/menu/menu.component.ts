@@ -35,7 +35,7 @@ export class MenuComponent implements OnInit{
     const menuItem = {
       name: this.newMenuItem.name,
       price: this.newMenuItem.price
-    } as CreateMenuItemCommand
+    } as CreateMenuItemCommand;
 
     this.menuClient.createMenuItem(menuItem).subscribe({
       next: result => {

@@ -10,14 +10,14 @@ public class CreateMenuItemCommandValidator : AbstractValidator<CreateMenuItemCo
     {
         _context = context;
 
-        RuleFor(v => v.NewMenuItem.Name)
+        RuleFor(v => v.Name)
             .NotEmpty()
             .MaximumLength(30)
             .MustAsync(BeUniqueName)
                 .WithMessage("'{PropertyName}' must be unique.")
                 .WithErrorCode("Unique");
         
-        RuleFor(v => v.NewMenuItem.Price)
+        RuleFor(v => v.Price)
             .NotEmpty()
             .GreaterThanOrEqualTo(0);
         
