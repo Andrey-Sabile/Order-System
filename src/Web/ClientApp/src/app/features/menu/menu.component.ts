@@ -41,7 +41,12 @@ export class MenuComponent implements OnInit{
       next: result => {
         if (result !== undefined)
         {
-          this.menuItems.push(menuItem);
+          const newItem = {
+            id: result,
+            name: menuItem.name,
+            price: menuItem.price
+          } as MenuItem
+          this.menuItems.push(newItem);
           this.newMenuItem = {};
         }
       }
