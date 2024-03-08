@@ -1,4 +1,5 @@
 using OrderSystem.Application.MenuItems.Commands;
+using OrderSystem.Application.MenuItems.Commands.CreateMenuItem;
 using OrderSystem.Application.MenuItems.Queries;
 using OrderSystem.Domain.Entities;
 
@@ -32,12 +33,6 @@ public class MenuItems : EndpointGroupBase
 
     public async Task<int> CreateMenuItem(ISender sender, CreateMenuItemCommand command)
     {
-        if (String.IsNullOrWhiteSpace(command.Name))
-            throw new ArgumentNullException("Name must not be empty", nameof(command.Name));
-
-        if (command.Price < 0)
-            throw new ArgumentOutOfRangeException("Price must not be negative", nameof(command.Price));
-
         return await sender.Send(command);
     }
 

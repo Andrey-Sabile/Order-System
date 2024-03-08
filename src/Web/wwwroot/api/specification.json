@@ -633,9 +633,7 @@
               },
               "price": {
                 "type": "integer",
-                "format": "int32",
-                "maximum": 2147483647.0,
-                "minimum": 0.0
+                "format": "int32"
               },
               "orders": {
                 "type": "array",
@@ -774,6 +772,20 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
+          "newMenuItem": {
+            "$ref": "#/components/schemas/NewMenuItemDto"
+          }
+        }
+      },
+      "NewMenuItemDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "menuItemId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "name": {
             "type": "string",
             "nullable": true
