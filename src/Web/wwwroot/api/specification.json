@@ -632,8 +632,8 @@
                 "nullable": true
               },
               "price": {
-                "type": "integer",
-                "format": "int32"
+                "type": "number",
+                "format": "decimal"
               },
               "orders": {
                 "type": "array",
@@ -783,8 +783,8 @@
             "nullable": true
           },
           "price": {
-            "type": "integer",
-            "format": "int32",
+            "type": "number",
+            "format": "decimal",
             "minimum": 0.0
           }
         }
@@ -802,8 +802,8 @@
             "nullable": true
           },
           "price": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "decimal"
           }
         }
       },

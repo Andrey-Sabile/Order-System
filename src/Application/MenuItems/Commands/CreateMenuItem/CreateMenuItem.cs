@@ -7,7 +7,7 @@ namespace OrderSystem.Application.MenuItems.Commands.CreateMenuItem;
 public record CreateMenuItemCommand : IRequest<int>
 {
     public string? Name { get; init; }
-    public int Price { get; init; }
+    public decimal Price { get; init; }
 }
 
 public class CreateMenuItemCommandHandler(IApplicationDbContext context) : IRequestHandler<CreateMenuItemCommand, int>

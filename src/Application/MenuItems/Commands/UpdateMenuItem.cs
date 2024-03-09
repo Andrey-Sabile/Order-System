@@ -6,7 +6,7 @@ public record UpdateMenuItemCommand : IRequest
 {
     public int Id { get; init; }
     public string? Name { get; init; }
-    public int Price { get; init; }
+    public decimal Price { get; init; }
 }
 
 public class UpdateMenuItemCommandHandler(IApplicationDbContext context) : IRequestHandler<UpdateMenuItemCommand>
