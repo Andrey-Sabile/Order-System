@@ -10,6 +10,8 @@ public class OrderDto
 
     public bool? Done { get; init; } = false;
 
+    public bool Paid { get; init; } = false;
+
     public IReadOnlyCollection<MenuItemOrderDto> MenuItemOrders { get; init; } = [];
 
     private class Mapping : Profile
