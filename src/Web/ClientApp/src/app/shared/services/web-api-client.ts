@@ -1305,6 +1305,7 @@ export class Order extends BaseAuditableEntity implements IOrder {
     items?: MenuItem[];
     menuItemOrders?: MenuItemOrder[];
     done?: boolean | undefined;
+    paid?: boolean;
 
     constructor(data?: IOrder) {
         super(data);
@@ -1325,6 +1326,7 @@ export class Order extends BaseAuditableEntity implements IOrder {
                     this.menuItemOrders!.push(MenuItemOrder.fromJS(item));
             }
             this.done = _data["done"];
+            this.paid = _data["paid"];
         }
     }
 
@@ -1349,6 +1351,7 @@ export class Order extends BaseAuditableEntity implements IOrder {
                 data["menuItemOrders"].push(item.toJSON());
         }
         data["done"] = this.done;
+        data["paid"] = this.paid;
         super.toJSON(data);
         return data;
     }
@@ -1359,6 +1362,7 @@ export interface IOrder extends IBaseAuditableEntity {
     items?: MenuItem[];
     menuItemOrders?: MenuItemOrder[];
     done?: boolean | undefined;
+    paid?: boolean;
 }
 
 export class MenuItemOrder extends BaseAuditableEntity implements IMenuItemOrder {
@@ -1526,6 +1530,7 @@ export class OrderDto implements IOrderDto {
     id?: number | undefined;
     tableNumber?: number | undefined;
     done?: boolean | undefined;
+    paid?: boolean;
     menuItemOrders?: MenuItemOrderDto[];
 
     constructor(data?: IOrderDto) {
@@ -1542,6 +1547,7 @@ export class OrderDto implements IOrderDto {
             this.id = _data["id"];
             this.tableNumber = _data["tableNumber"];
             this.done = _data["done"];
+            this.paid = _data["paid"];
             if (Array.isArray(_data["menuItemOrders"])) {
                 this.menuItemOrders = [] as any;
                 for (let item of _data["menuItemOrders"])
@@ -1562,6 +1568,7 @@ export class OrderDto implements IOrderDto {
         data["id"] = this.id;
         data["tableNumber"] = this.tableNumber;
         data["done"] = this.done;
+        data["paid"] = this.paid;
         if (Array.isArray(this.menuItemOrders)) {
             data["menuItemOrders"] = [];
             for (let item of this.menuItemOrders)
@@ -1575,6 +1582,7 @@ export interface IOrderDto {
     id?: number | undefined;
     tableNumber?: number | undefined;
     done?: boolean | undefined;
+    paid?: boolean;
     menuItemOrders?: MenuItemOrderDto[];
 }
 

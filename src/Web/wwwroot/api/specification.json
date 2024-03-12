@@ -680,6 +680,9 @@
               "done": {
                 "type": "boolean",
                 "nullable": true
+              },
+              "paid": {
+                "type": "boolean"
               }
             }
           }
@@ -824,6 +827,9 @@
           "done": {
             "type": "boolean",
             "nullable": true
+          },
+          "paid": {
+            "type": "boolean"
           },
           "menuItemOrders": {
             "type": "array",
