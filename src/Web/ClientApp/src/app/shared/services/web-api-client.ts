@@ -1532,6 +1532,7 @@ export class OrderDto implements IOrderDto {
     done?: boolean | undefined;
     paid?: boolean;
     menuItemOrders?: MenuItemOrderDto[];
+    totalOrderPrice?: number;
 
     constructor(data?: IOrderDto) {
         if (data) {
@@ -1553,6 +1554,7 @@ export class OrderDto implements IOrderDto {
                 for (let item of _data["menuItemOrders"])
                     this.menuItemOrders!.push(MenuItemOrderDto.fromJS(item));
             }
+            this.totalOrderPrice = _data["totalOrderPrice"];
         }
     }
 
@@ -1574,6 +1576,7 @@ export class OrderDto implements IOrderDto {
             for (let item of this.menuItemOrders)
                 data["menuItemOrders"].push(item.toJSON());
         }
+        data["totalOrderPrice"] = this.totalOrderPrice;
         return data;
     }
 }
@@ -1584,12 +1587,15 @@ export interface IOrderDto {
     done?: boolean | undefined;
     paid?: boolean;
     menuItemOrders?: MenuItemOrderDto[];
+    totalOrderPrice?: number;
 }
 
 export class MenuItemOrderDto implements IMenuItemOrderDto {
     orderQuantity?: number;
     menuItemId?: number;
     name?: string | undefined;
+    price?: number;
+    totalPrice?: number;
 
     constructor(data?: IMenuItemOrderDto) {
         if (data) {
@@ -1605,6 +1611,8 @@ export class MenuItemOrderDto implements IMenuItemOrderDto {
             this.orderQuantity = _data["orderQuantity"];
             this.menuItemId = _data["menuItemId"];
             this.name = _data["name"];
+            this.price = _data["price"];
+            this.totalPrice = _data["totalPrice"];
         }
     }
 
@@ -1620,6 +1628,8 @@ export class MenuItemOrderDto implements IMenuItemOrderDto {
         data["orderQuantity"] = this.orderQuantity;
         data["menuItemId"] = this.menuItemId;
         data["name"] = this.name;
+        data["price"] = this.price;
+        data["totalPrice"] = this.totalPrice;
         return data;
     }
 }
@@ -1628,6 +1638,8 @@ export interface IMenuItemOrderDto {
     orderQuantity?: number;
     menuItemId?: number;
     name?: string | undefined;
+    price?: number;
+    totalPrice?: number;
 }
 
 export class CreateOrderCommand implements ICreateOrderCommand {
@@ -1720,6 +1732,8 @@ export interface INewOrderDto {
 
 export class UpdateOrderCommand implements IUpdateOrderCommand {
     orderId?: number;
+    done?: boolean;
+    paid?: boolean;
 
     constructor(data?: IUpdateOrderCommand) {
         if (data) {
@@ -1733,6 +1747,8 @@ export class UpdateOrderCommand implements IUpdateOrderCommand {
     init(_data?: any) {
         if (_data) {
             this.orderId = _data["orderId"];
+            this.done = _data["done"];
+            this.paid = _data["paid"];
         }
     }
 
@@ -1746,12 +1762,16 @@ export class UpdateOrderCommand implements IUpdateOrderCommand {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["orderId"] = this.orderId;
+        data["done"] = this.done;
+        data["paid"] = this.paid;
         return data;
     }
 }
 
 export interface IUpdateOrderCommand {
     orderId?: number;
+    done?: boolean;
+    paid?: boolean;
 }
 
 export class UpdateOrderQuantityCommand implements IUpdateOrderQuantityCommand {

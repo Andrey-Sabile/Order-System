@@ -836,6 +836,10 @@
             "items": {
               "$ref": "#/components/schemas/MenuItemOrderDto"
             }
+          },
+          "totalOrderPrice": {
+            "type": "number",
+            "format": "decimal"
           }
         }
       },
@@ -854,6 +858,14 @@
           "name": {
             "type": "string",
             "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "totalPrice": {
+            "type": "number",
+            "format": "decimal"
           }
         }
       },
@@ -895,6 +907,12 @@
           "orderId": {
             "type": "integer",
             "format": "int32"
+          },
+          "done": {
+            "type": "boolean"
+          },
+          "paid": {
+            "type": "boolean"
           }
         }
       },

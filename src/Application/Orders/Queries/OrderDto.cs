@@ -14,6 +14,8 @@ public class OrderDto
 
     public IReadOnlyCollection<MenuItemOrderDto> MenuItemOrders { get; init; } = [];
 
+    public decimal TotalOrderPrice => MenuItemOrders.Sum(item => item.TotalPrice);
+
     private class Mapping : Profile
     {
         public Mapping()

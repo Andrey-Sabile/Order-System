@@ -38,7 +38,13 @@ export class KitchendisplayComponent implements OnInit, OnDestroy{
   }
 
   orderCompleted(id: number): void {
-    this.orderClient.updateOrder(id, { orderId: id } as UpdateOrderCommand).subscribe({
+    const command = {
+      orderId: id,
+      done: true,
+      paid: false,
+    } as UpdateOrderCommand
+    
+    this.orderClient.updateOrder(id, command).subscribe({
       next: () => this.remainingOrders = this.remainingOrders.filter(order => order.id !== id)
     });
   }

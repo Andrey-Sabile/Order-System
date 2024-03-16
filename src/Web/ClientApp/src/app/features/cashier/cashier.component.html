@@ -1,1 +1,47 @@
-<p>cashier works!</p>
+<h1>Unpaid Orders</h1>
+
+<div class="row">
+    <div class="list-group">
+        @for (unpaidOrder of unpaidOrders; track unpaidOrder) {
+            <button type="button" class="list-group-item list-group-item-action" (click)="setUnpaidOrder(unpaidOrder)" data-bs-toggle="modal" data-bs-target="#payOrderModal">
+                <div class="d-flex align-items-center">
+                    <div class="flex-fill">
+                        {{ unpaidOrder.id }}
+                        {{ unpaidOrder.tableNumber}} 
+                    </div>
+                </div>
+            </button>
+        }
+    </div>
+</div>
+
+<!--Modals-->
+<div class="modal fade" id="payOrderModal">
+    <div class="modal-dialog modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Pay Order no: {{ selectedUnpaidOrder.id }}</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+            <ul class="list-group">
+                @for (item of selectedUnpaidOrder.menuItemOrders; track item) {
+                    <li class="list-group-item">
+                        <div class="d-flex align-items-center">
+                            {{ item.orderQuantity }}
+                            {{ item.name }}
+                            {{ item.totalPrice }}
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="modal-footer">
+            <div>${{ selectedUnpaidOrder.totalOrderPrice }}</div>
+            <div class="float-end">
+                <button class="btn btn-primary" data-bs-dismiss="modal" (click)="payOrder(this.selectedUnpaidOrder)">Pay</button>
+            </div>
+        </div>
+    </div>
+</div>
