@@ -10,6 +10,10 @@ namespace OrderSystem.Application.Orders.Queries
 
         public string? Name { get; set; }
 
+        public decimal Price { get; set; }
+
+        public decimal TotalPrice => OrderQuantity * Price;
+
         private class Mapping : Profile
         {
             public Mapping()
