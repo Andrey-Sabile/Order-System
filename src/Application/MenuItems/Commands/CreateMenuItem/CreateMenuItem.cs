@@ -1,12 +1,12 @@
 using OrderSystem.Application.Common.Interfaces;
 using OrderSystem.Domain.Entities;
-using OrderSystem.Application.MenuItems.Commands.CreateMenuItem;
 
 namespace OrderSystem.Application.MenuItems.Commands.CreateMenuItem;
 
 public record CreateMenuItemCommand : IRequest<int>
 {
     public string? Name { get; init; }
+    
     public decimal Price { get; init; }
 }
 
