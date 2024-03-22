@@ -1,22 +1,22 @@
 <div class="d-flex flex-column flex-shrink-0 p-3">
-    <ul class="navbar-nav flex-column mb-auto">
-        <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/menu']">
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a class="nav-link text-dark" [routerLink]="['/menu']" [routerLinkActive]="['active', 'text-white']">
                 <i class="bi bi-book me-2"></i>Menu
             </a>
         </li>
-        <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/orders']">
+        <li class="nav-item">
+            <a class="nav-link text-dark" [routerLink]="['/orders']" [routerLinkActive]="['active', 'text-white']">
                 <i class="bi bi-table me-2"></i>Orders
             </a>
         </li>
-        <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/kitchen']">
+        <li class="nav-item">
+            <a class="nav-link text-dark" [routerLink]="['/kitchen']" [routerLinkActive]="['active', 'text-white']">
                 <i class="bi bi-egg-fried me-2"></i>Kitchen
             </a>
         </li>
-        <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/cashier']">
+        <li class="nav-item">
+            <a class="nav-link text-dark" [routerLink]="['/cashier']" [routerLinkActive]="['active', 'text-white']">
                 <i class="bi bi-cash me-2"></i>Cashier
             </a>
         </li>
